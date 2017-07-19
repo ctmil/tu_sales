@@ -22,5 +22,7 @@ class sale_order(models.Model):
 		for order in orders:
 			if order.state in ['draft','sent']:
 				if order.write_date < str(now_2hours):
-					order.action_cancel()
+					#order.action_cancel()
+					for line in order.order_line:
+						line.unlink()
 				
