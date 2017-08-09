@@ -21,8 +21,8 @@ class sale_order(models.Model):
 		orders = self.search([('state','in',['draft','sent'])])
 		for order in orders:
 			if order.state in ['draft','sent']:
-				if order.write_date < str(now_2hours):
-					#order.action_cancel()
-					for line in order.order_line:
+				for line in order.order_line:
+					if order.write_date < str(now_2hours) or line.write_date < str(now_2hours):
+						#order.action_cancel()
 						line.unlink()
 				
