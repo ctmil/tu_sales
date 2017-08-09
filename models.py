@@ -17,7 +17,7 @@ class sale_order(models.Model):
 
 	@api.model
 	def clean_sale_orders(self):
-		now_2hours = datetime.today() - timedelta(hours=2)
+		now_2hours = datetime.today() - timedelta(hours=1)
 		orders = self.search([('state','in',['draft','sent'])])
 		for order in orders:
 			if order.state in ['draft','sent']:
